@@ -19,12 +19,13 @@ var local = {
         { componente: "HDD Wezter Dishital", precio: 75 },
         { componente: "RAM Quinston", precio: 110 },
         { componente: "RAM Quinston Fury", precio: 230 }
-    ]
+    ],
+
+    sucursales: ["Centro", "Caballito"],
+
 };
 
-console.log("Arrays")
-
-console.log(local)
+console.log("PRIMER PUNTO")
 
 console.log(" ")
 console.log("Funcion 1")
@@ -80,23 +81,6 @@ console.log(cantidadVentas("HDD Wezter Dishital"));
 console.log(cantidadVentas("RAM Quinston"));
 console.log(cantidadVentas("RAM Quinston Fury"));
 
-
-console.log(" ")
-console.log("Funcion 4")
-
-function ventasMes(mes, anio) {
-    var montovendido = 0;
-    for (var i = 0; i < local.ventas.length; i++) {
-        if ((mes == (local.ventas[i].fecha.getMonth() + 1)) && (anio == local.ventas[i].fecha.getFullYear())) {
-            montovendido = (montovendido + precioMaquina(local.ventas[i].componentes));
-        }
-    }
-    return montovendido
-}
-
-console.log(ventasMes(1, 2019));
-console.log(ventasMes(2, 2019));
-
 console.log(" ")
 console.log("Funcion 3")
 
@@ -132,6 +116,24 @@ function vendedoraDelMes(mes, anio) {
 
 console.log("En Enero la ganadora fue: " + vendedoraDelMes(1, 2019));
 console.log("En Febrero la ganadora fue: " + vendedoraDelMes(2, 2019))
+
+console.log(" ")
+console.log("Funcion 4")
+
+function ventasMes(mes, anio) {
+    var montovendido = 0;
+    for (var i = 0; i < local.ventas.length; i++) {
+        if ((mes == (local.ventas[i].fecha.getMonth() + 1)) && (anio == local.ventas[i].fecha.getFullYear())) {
+            montovendido = (montovendido + precioMaquina(local.ventas[i].componentes));
+        }
+    }
+    return montovendido
+}
+
+console.log(ventasMes(1, 2019));
+console.log(ventasMes(2, 2019));
+
+
 
 console.log(" ")
 console.log("Funcion 5")
@@ -212,3 +214,115 @@ console.log(huboVentas(9, 2019));
 console.log(huboVentas(10, 2019));
 console.log(huboVentas(11, 2019));
 console.log(huboVentas(12, 2019));
+
+
+console.log("Segundo PUNTO")
+
+console.log(" ")
+console.log("Ejercicio 1")
+
+for (var i = 0; i < local.ventas.length; i++) {
+    local.ventas[i].sucursal = "Centro"
+}
+
+console.log(local.ventas)
+
+console.log(" ")
+console.log("Ejercicio 2")
+
+console.log(local);
+
+console.log(" ")
+console.log("Ejercicio 3")
+
+function agregarInfo(anio, mes, dia, vendedora, componentes, sucursal) {
+    local.ventas.push({fecha: new Date(anio, mes, dia), nombreVendedora: vendedora, componentes: componentes, sucursal: sucursal})
+    return (local.ventas)
+}
+
+console.log(agregarInfo(2019, 1, 12, "Hedy", ["Monitor GPRS 3000", "HDD Toyiva"], "Centro"));
+console.log(agregarInfo(2019, 1, 24, "Sheryl", ["Motherboard ASUS 1500", "HDD Wezter Dishital"], "Caballito"));
+console.log(agregarInfo(2019, 1, 1, "Ada", ["Motherboard MZI", "RAM Quinston Fury"], "Centro"));
+console.log(agregarInfo(2019, 1, 11, "Grace", ["Monitor ASC 543", "RAM Quinston"], "Caballito"));
+console.log(agregarInfo(2019, 1, 15, "Ada", ["Motherboard ASUS 1200", "RAM Quinston Fury"], "Centro"));
+console.log(agregarInfo(2019, 1, 12, "Hedy", ["Motherboard ASUS 1500", "HDD Toyiva"], "Caballito"));
+console.log(agregarInfo(2019, 1, 21, "Grace", ["Motherboard MZI", "RAM Quinston"], "Centro"));
+console.log(agregarInfo(2019, 1, 8, "Sheryl", ["Monitor ASC 543", "HDD Wezter Dishital"], "Centro"));
+console.log(agregarInfo(2019, 1, 16, "Sheryl", ["Monitor GPRS 3000", "RAM Quinston Fury"], "Centro"));
+console.log(agregarInfo(2019, 1, 27, "Hedy", ["Motherboard ASUS 1200", "HDD Toyiva"], "Caballito"));
+console.log(agregarInfo(2019, 1, 22, "Grace", ["Monitor ASC 543", "HDD Wezter Dishital"], "Centro"));
+console.log(agregarInfo(2019, 1, 5, "Ada", ["Motherboard ASUS 1500", "RAM Quinston"], "Centro"));
+console.log(agregarInfo(2019, 1, 1, "Grace", ["Motherboard MZI", "HDD Wezter Dishital"], "Centro"));
+console.log(agregarInfo(2019, 1, 7, "Sheryl", ["Monitor GPRS 3000", "RAM Quinston"], "Caballito"));
+console.log(agregarInfo(2019, 1, 14, "Ada", ["Motherboard ASUS 1200", "HDD Toyiva"], "Centro"));
+
+
+console.log(" ")
+console.log("Ejercicio 4")
+
+
+
+function ventaSucursal(sucursal) {
+    var ventastotaless = 0
+    for (var i = 0; i < local.ventas.length; i++) {
+        if (sucursal == local.ventas[i].sucursal) {
+            ventastotaless = (ventastotaless + precioMaquina(local.ventas[i].componentes));
+        }
+    }
+    return ventastotaless
+}
+
+console.log("Centro vendió en total: " + ventaSucursal("Centro"));
+console.log("Caballito vendió en total: " + ventaSucursal("Caballito"));
+
+console.log(" ")
+console.log("Ejercicio 5")
+
+function ventasTotal(dato, parametro) {
+    var ventastotal = 0
+    for (var i = 0; i < local.ventas.length; i++) {
+        console.log(dato, parametro );
+        console.log(local.ventas[i].nombreVendedora);
+        console.log(dato)
+        if (parametro == dato) {
+            ventastotal = (ventastotal + precioMaquina(local.ventas[i].componentes));
+        }
+    }
+    return ventastotal
+}
+
+console.log("Prueba con Grace (vendedora):" + ventasTotal(local.ventas[i].nombreVendedora, "Grace"))
+
+console.log(" ")
+console.log("Funcion 6")
+
+var sucursal1 = "Centro"
+var sucursal2 = "Caballito"
+var ganador
+
+function sucursalDelMes(mes, anio) {
+    var vtassucursal1 = 0;
+    var vtassucursal2 = 0;
+
+    for (var i = 0; i < local.ventas.length; i++) {
+        if ((mes == local.ventas[i].fecha.getMonth() + 1) && (anio == local.ventas[i].fecha.getFullYear()) && (sucursal1 == local.ventas[i].sucursal)) {
+            vtassucursal1 = (vtassucursal1 + precioMaquina(local.ventas[i].componentes));
+        }
+    }
+    for (var j = 0; j < local.ventas.length; j++) {
+        if ((mes == local.ventas[j].fecha.getMonth() + 1) && (anio == local.ventas[j].fecha.getFullYear()) && (sucursal2 == local.ventas[j].sucursal)) {
+            vtassucursal2 = (vtassucursal2 + precioMaquina(local.ventas[j].componentes));
+        }
+    }
+    if (vtassucursal1 > vtassucursal2) {
+        ganador = sucursal1;
+    } else {
+        ganadora = sucursal2;
+    }
+    return ganador
+}
+
+
+
+console.log("En Enero el local que más vendió fue: " + sucursalDelMes(1, 2019));
+console.log("En Febrero el local que más vendió fue: " + sucursalDelMes(2, 2019))
