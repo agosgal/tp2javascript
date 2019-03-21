@@ -30,28 +30,24 @@ console.log("PRIMER PUNTO")
 console.log(" ")
 console.log("Funcion 1")
 
-var precio1
-var precio2
+var precio1 = 0
 
 
 function precioMaquina(componentes) {
-    for (i = 0; i < local.precios.length; i++) {
-        if (componentes[0] == local.precios[i].componente) {
-            precio1 = local.precios[i].precio
+    var precio1 = 0
+    for (var i = 0; i < local.precios.length; i++) {
+        for (var j = 0; j < componentes.length; j++) {
+            if (componentes[j] ==  local.precios[i].componente) {
+                precio1 = ((local.precios[i].precio) + precio1)
+            }
         }
     }
-    for (j = 0; j < local.precios.length; j++) {
-        if (componentes[1] == local.precios[j].componente) {
-            precio2 = local.precios[j].precio
-        }
-    }
-    return precio1 + precio2
+    return precio1
 }
 
-console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]))
-console.log(precioMaquina(["HDD Toyiva", "RAM Quinston"]))
-console.log(precioMaquina(["Motherboard ASUS 1200", "Monitor ASC 543"]))
-
+console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]));
+console.log(precioMaquina(["Monitor ASC 543", "RAM Quinston"]));
+console.log(precioMaquina(["RAM Quinston Fury", "Motherboard MZI"]));
 
 
 console.log(" ")
@@ -113,9 +109,43 @@ function vendedoraDelMes(mes, anio) {
 }
 
 
-
 console.log("En Enero la ganadora fue: " + vendedoraDelMes(1, 2019));
 console.log("En Febrero la ganadora fue: " + vendedoraDelMes(2, 2019))
+
+console.log(" ")
+console.log("Funcion 3 - sin hardcodear")
+
+function vendedoraDelMes2(mes, anio) {
+    var arrayVendedoras = []
+    for (var j = 0; j<local.vendedoras.length; j++)  {
+        console.log(objetoNuevo)
+        var objetoNuevo = 
+        { nombre: local.vendedoras[j],
+        ventas: 0,
+    }
+        for (var i = 0; i<local.ventas.length; i++) {
+            if (local.ventas[i].fecha.getMonth() + 1 == mes && local.ventas[i].fecha.getFullYear() == anio) {
+                if (local.vendedoras[j] === local.ventas[i].nombreVendedora) {
+                    if (objetoNuevo.nombre === local.ventas[i].nombreVendedora) {
+                    objetoNuevo.ventas = (objetoNuevo.ventas + precioMaquina(local.ventas[i].componentes))
+                }
+                }
+            }
+
+        }
+
+        arrayVendedoras.push(objetoNuevo);
+        console.log(arrayVendedoras);
+        var valorMax = 0;
+        for (var k = 0; k<arrayVendedoras.length; k++) {
+            if (valorMax < arrayVendedoras[k].ventas) {
+                valorMax = arrayVendedoras[k].ventas;
+                console.log(valorMax)
+            }
+        }
+
+    }
+}
 
 console.log(" ")
 console.log("Funcion 4")
@@ -186,13 +216,14 @@ console.log("Funcion 7")
 var ventassino
 var mesesconvta = []
 
-for (var i = 0; i < local.ventas.length; i++) {
-    (mesesconvta.push(local.ventas[i].fecha.getMonth() + 1));
-    console.log(mesesconvta)
-} 
 
 function huboVentas(mes, anio) {
-for (var j = 0; j < mesesconvta.length; j++) {
+for (var i = 0; i < local.ventas.length; i++) {
+
+    for (var i = 0; i < local.ventas.length; i++) {
+        (mesesconvta.push(local.ventas[i].fecha.getMonth() + 1));
+    } 
+
     if (mesesconvta.includes(mes)) {
         ventassino = "Si"
     } else {
@@ -201,6 +232,8 @@ for (var j = 0; j < mesesconvta.length; j++) {
 }
 return ventassino
 }
+
+
 
 console.log(huboVentas(1, 2019));
 console.log(huboVentas(2, 2019));
@@ -215,7 +248,8 @@ console.log(huboVentas(10, 2019));
 console.log(huboVentas(11, 2019));
 console.log(huboVentas(12, 2019));
 
-
+console.log(" ")
+console.log(" ")
 console.log("Segundo PUNTO")
 
 console.log(" ")
@@ -272,26 +306,32 @@ function ventaSucursal(sucursal) {
     return ventastotaless
 }
 
+local.ventas
+local[variable]
+var variable = "componentes"
+
 console.log("Centro vendió en total: " + ventaSucursal("Centro"));
 console.log("Caballito vendió en total: " + ventaSucursal("Caballito"));
 
 console.log(" ")
 console.log("Ejercicio 5")
 
+
+
 function ventasTotal(dato, parametro) {
     var ventastotal = 0
     for (var i = 0; i < local.ventas.length; i++) {
-        console.log(dato, parametro );
-        console.log(local.ventas[i].nombreVendedora);
-        console.log(dato)
-        if (parametro == dato) {
+        if (parametro == local.ventas[i][dato]) {
             ventastotal = (ventastotal + precioMaquina(local.ventas[i].componentes));
         }
     }
     return ventastotal
 }
 
-console.log("Prueba con Grace (vendedora):" + ventasTotal(local.ventas[i].nombreVendedora, "Grace"))
+console.log(ventasTotal("nombreVendedora", "Grace"));
+console.log(ventasTotal("nombreVendedora", "Ada"));
+console.log(ventasTotal("sucursal", "Centro"));
+console.log(ventasTotal("sucursal", "Caballito"))
 
 console.log(" ")
 console.log("Funcion 6")
