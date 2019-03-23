@@ -36,7 +36,7 @@ function precioMaquina(componentes) {
     var precio1 = 0
     for (var i = 0; i < local.precios.length; i++) {
         for (var j = 0; j < componentes.length; j++) {
-            if (componentes[j] ==  local.precios[i].componente) {
+            if (componentes[j] == local.precios[i].componente) {
                 precio1 = ((local.precios[i].precio) + precio1)
             }
         }
@@ -56,10 +56,10 @@ function cantidadVentas(componente2) {
     var cantidadvendida = 0;
     for (var i = 0; i < local.ventas.length; i++) {
         for (var j = 0; j < componente2.length; j++) {
-        if (local.ventas[i].componentes.includes(componente2[j])) {
-            cantidadvendida++
+            if (local.ventas[i].componentes.includes(componente2[j])) {
+                cantidadvendida++
+            }
         }
-    }
     }
     return cantidadvendida
 }
@@ -77,68 +77,57 @@ console.log(cantidadVentas(["RAM Quinston Fury"]));
 
 console.log(" ")
 console.log("Funcion 3")
-
-var vendedora1 = "Ada"
-var vendedora2 = "Grace"
-var ganadora
-
 function vendedoraDelMes(mes, anio) {
-    var vtasvendedora1 = 0;
-    var vtasvendedora2 = 0;
-
-    for (var i = 0; i < local.ventas.length; i++) {
-        if ((mes == local.ventas[i].fecha.getMonth() + 1) && (anio == local.ventas[i].fecha.getFullYear()) && (vendedora1 == local.ventas[i].nombreVendedora)) {
-            vtasvendedora1 = (vtasvendedora1 + precioMaquina(local.ventas[i].componentes));
-            console.log("La vendedora 1 vendió: " + vtasvendedora1)
-        }
+    var arraynuevov = []
+    for (var i = 0; i < local.vendedoras.length; i++) {
+        var arrayvend =
+            { vendedora: local.vendedoras[i], ventas: 0 }
+        arraynuevov.push(arrayvend)
     }
-    for (var j = 0; j < local.ventas.length; j++) {
-        if ((mes == local.ventas[j].fecha.getMonth() + 1) && (anio == local.ventas[j].fecha.getFullYear()) && (vendedora2 == local.ventas[j].nombreVendedora)) {
-            vtasvendedora2 = (vtasvendedora2 + precioMaquina(local.ventas[j].componentes));
-            console.log("La vendedora 2 vendió: " + vtasvendedora2)
-        }
-    }
-    if (vtasvendedora1 > vtasvendedora2) {
-        ganadora = vendedora1;
-    } else {
-        ganadora = vendedora2;
-    }
-    return ganadora
-}
-
-
-console.log("En Enero la ganadora fue: " + vendedoraDelMes(1, 2019));
-console.log("En Febrero la ganadora fue: " + vendedoraDelMes(2, 2019))
-
-console.log(" ")
-console.log("Funcion 3 - sin hardcodear")
-
-function vendedoraDelMes2(mes, anio) {
-    var arrayVendedoras = []
-    for (var j = 0; j<local.vendedoras.length; j++)  {
-        var objetoNuevo = [
-        { nombre: local.vendedoras[j], ventas: 0}
-]
-        for (var i = 0; i<local.ventas.length; i++) {
-            if (local.ventas[i].fecha.getMonth() + 1 == mes && local.ventas[i].fecha.getFullYear() == anio) {
-                if (local.vendedoras[j] === local.ventas[i].nombreVendedora) {
-                     {
-                    objetoNuevo.ventas = (objetoNuevo.ventas + precioMaquina(local.ventas[i].componentes))
-                }
-                }
-                if (objetoNuevo[i].nombre === local.ventas[i].nombreVendedora)
-                console.log(objetoNuevo)
+    for (var j = 0; j < arraynuevov.length; j++) {
+        for (var k = 0; k < local.ventas.length; k++) {
+            if (arraynuevov[j].vendedora == local.ventas[k].nombreVendedora) {
+                arraynuevov[j].ventas = ((arraynuevov[j].ventas) + precioMaquina(local.ventas[k].componentes));
             }
-
         }
-
     }
+    var valormax = 0
+    for (var n = 0; n < arraynuevov.length; n++) {
+        if (valormax < arraynuevov[n].ventas) {
+            valormax = arraynuevov[n].ventas;
+            console.log("La sucursal que más vendió fue", arraynuevov[n].vendedora)
+        }
+    }
+    return " "
 }
-console.log(vendedoraDelMes2(2, 2019))
 
-console.log(" ")
-console.log(" ")
-console.log(" ")
+console.log(vendedoraDelMes(1, 2019))
+
+// function vendedoraDelMes2(mes, anio) {
+//     var arraydatos = []
+//     for (var i = 0; i < local.vendedoras.length; i++) {
+//         var arrayvendedora =
+//             { vendedora: local.vendedoras[i], ventas: 0 }
+//         arraydatos.push(arrayvendedora);
+//     }
+//     for (var j = 0; j < arraydatos.length; j++) {
+//         for (var k = 0; k < local.ventas.length; k++) {
+//             if (arraydatos[j].vendedora == local.ventas[k].nombreVendedora) {
+//                 arraydatos[j].ventas = ((arraydatos[j].ventas) + precioMaquina(local.ventas[k].componentes));
+//             }
+//         }
+//     }
+//     var valormax = 0
+//     for (var n = 0; n < arraydatos.length; n++) {
+//         if (valormax < arraydatos[n].ventas) {
+//             valormax = arraydatos[n].ventas;
+//             console.log("La vendedora que más vendió fue", arraydatos[n].vendedora, "con", valormax)
+//         }
+//     }
+//     return " "
+// }
+// console.log(vendedoraDelMes2(1, 2019))
+
 
 
 console.log(" ")
@@ -185,16 +174,16 @@ function componenteMasVendido() {
     for (var i = 0; i < local.precios.length; i++) {
         (cantidadVentas(local.precios[i].componente));
         (qvendidas.push(cantidadVentas(local.precios[i].componente)));
-       }
+    }
     for (var j = 0; j < qvendidas.length; j++) {
         var mayorvalor = 0;
         if (qvendidas[j] > mayorvalor) {
             mayorvalor = qvendidas[j];
         }
-    for (var k = 0; k < local.precios.length; k++) {
-        var masvendido
-        if (mayorvalor == (cantidadVentas(local.precios[k].componente))) {
-            masvendido = local.precios[k].componente
+        for (var k = 0; k < local.precios.length; k++) {
+            var masvendido
+            if (mayorvalor == (cantidadVentas(local.precios[k].componente))) {
+                masvendido = local.precios[k].componente
             }
         }
         return masvendido
@@ -207,24 +196,25 @@ console.log(componenteMasVendido());
 console.log(" ")
 console.log("Funcion 7")
 
-var ventassino
-var mesesconvta = []
+
 
 
 function huboVentas(mes, anio) {
-for (var i = 0; i < local.ventas.length; i++) {
-
+    var ventassino
+    var mesesconvta = []
     for (var i = 0; i < local.ventas.length; i++) {
-        (mesesconvta.push(local.ventas[i].fecha.getMonth() + 1));
-    } 
 
-    if (mesesconvta.includes(mes)) {
-        ventassino = "Si"
-    } else {
-        ventassino = "No"
+        for (var i = 0; i < local.ventas.length; i++) {
+            (mesesconvta.push(local.ventas[i].fecha.getMonth() + 1));
+        }
+
+        if (mesesconvta.includes(mes)) {
+            ventassino = "Si"
+        } else {
+            ventassino = "No"
+        }
     }
-}
-return ventassino
+    return ventassino
 }
 
 
@@ -264,7 +254,7 @@ console.log(" ")
 console.log("Ejercicio 3")
 
 function agregarInfo(anio, mes, dia, vendedora, componentes, sucursal) {
-    local.ventas.push({fecha: new Date(anio, mes, dia), nombreVendedora: vendedora, componentes: componentes, sucursal: sucursal})
+    local.ventas.push({ fecha: new Date(anio, mes, dia), nombreVendedora: vendedora, componentes: componentes, sucursal: sucursal })
     return (local.ventas)
 }
 
@@ -330,59 +320,32 @@ console.log(ventasTotal("sucursal", "Caballito"))
 console.log(" ")
 console.log("Funcion 6")
 
-// var sucursal1 = "Centro"
-// var sucursal2 = "Caballito"
-// var ganador
-
-// function sucursalDelMes(mes, anio) {
-//     var vtassucursal1 = 0;
-//     var vtassucursal2 = 0;
-
-//     for (var i = 0; i < local.ventas.length; i++) {
-//         if ((mes == local.ventas[i].fecha.getMonth() + 1) && (anio == local.ventas[i].fecha.getFullYear()) && (sucursal1 == local.ventas[i].sucursal)) {
-//             vtassucursal1 = (vtassucursal1 + precioMaquina(local.ventas[i].componentes));
-//         }
-//     }
-//     for (var j = 0; j < local.ventas.length; j++) {
-//         if ((mes == local.ventas[j].fecha.getMonth() + 1) && (anio == local.ventas[j].fecha.getFullYear()) && (sucursal2 == local.ventas[j].sucursal)) {
-//             vtassucursal2 = (vtassucursal2 + precioMaquina(local.ventas[j].componentes));
-//         }
-//     }
-//     if (vtassucursal1 > vtassucursal2) {
-//         ganador = sucursal1;
-//     } else {
-//         ganadora = sucursal2;
-//     }
-//     return ganador
-// }
-
-
-
-// console.log("En Enero el local que más vendió fue: " + sucursalDelMes(1, 2019));
-// console.log("En Febrero el local que más vendió fue: " + sucursalDelMes(2, 2019))
 
 function sucursalDelMes(mes, anio) {
-    for ( var i = 0; i<local.sucursales.length; i++) {
-        var arraysuc = {
-            sucursal: local.sucursales[i], ventas: 0}
-        console.log(arraysuc)
+    var arraynuevo = []
+    for (var i = 0; i < local.sucursales.length; i++) {
+        var arraysuc =
+            { sucursal: local.sucursales[i], ventas: 0 }
+        arraynuevo.push(arraysuc)
     }
-
-    for (var j = 0; j < local.ventas.length; j++) {
-        console.log(local.ventas[j].sucursal)
-        for (var k= 0; k < arraysuc.length; k++) {
-            console.log(local.ventas[j].sucursal)
-        if ((mes == (local.ventas[j].fecha.getMonth() + 1)) && (anio == local.ventas[i].fecha.getFullYear())) {
-            if (arraysuc[k].sucursal === local.ventas[j].sucursal) {
-            arraysuc[k].ventas = arraysuc[i].ventas + precioMaquina(local.ventas[j].componentes)
+    for (var j = 0; j < arraynuevo.length; j++) {
+        for (var k = 0; k < local.ventas.length; k++) {
+            if (arraynuevo[j].sucursal == local.ventas[k].sucursal) {
+                arraynuevo[j].ventas = ((arraynuevo[j].ventas) + precioMaquina(local.ventas[k].componentes));
             }
         }
+    }
+    var valormax = 0
+    for (var n = 0; n < arraynuevo.length; n++) {
+        if (valormax < arraynuevo[n].ventas) {
+            valormax = arraynuevo[n].ventas;
+            console.log("La sucursal que más vendió fue", arraynuevo[n].sucursal)
         }
     }
+    return " "
 }
 
-
-console.log(sucursalDelMes(1,2019))
+console.log(sucursalDelMes(1, 2019))
 
 
 console.log(" ")
@@ -392,61 +355,45 @@ console.log(" ")
 console.log("Ejercicio 1")
 
 
-// function renderPorMes() {
-//     var meses = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-//     var mespalabra = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-       
-//     for (var i = 0; i < local.ventas.length; i++) {
-//             for (var j = 0; j < meses.length; j++) {  
-//                 var totalmes=0
-//                 if(meses[j] == (local.ventas[i].fecha.getMonth() + 1)) {        
-//                     totalmes = ((totalmes) + (ventasMes(meses[j], 2019)));
-//                     console.log("En el mes de " + mespalabra[j] + " se facturaron $" + (ventasMes(meses[j], 2019)))
-//             }
-//             }
-//         }   
-//         return " "
+function renderPorMes() {
+    var meses = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    var mespalabra = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
-//         }
-        
-    
-//     console.log(renderPorMes()) 
-
-    function renderPorMes() {
-        var meses = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-        var mespalabra = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
-        
-        for (var i = 0; i < local.ventas.length; i++) {
-                for (var j = 0; j < meses.length; j++) {  
-                    var totalmes=0
-                    if(meses[j] == (local.ventas[i].fecha.getMonth() + 1)) {        
-                        totalmes = ((totalmes) + (ventasMes(meses[j], 2019)));
-                        console.log("En el mes de " + mespalabra[j] + " se facturaron $" + (ventasMes(meses[j], 2019)))
-                }
-                }
-            }   
-            return " "
-    
+    for (var i = 0; i < local.ventas.length; i++) {
+        for (var j = 0; j < meses.length; j++) {
+            var totalmes = 0
+            if (meses[j] == (local.ventas[i].fecha.getMonth() + 1)) {
+                totalmes = ((totalmes) + (ventasMes(meses[j], 2019)));
             }
-            
-        
-        console.log(renderPorMes()) 
+
+        }
+        if ((ventasMes(meses[i], 2019)) > 0) {
+            console.log("Total de", mespalabra[i], "2019: ", (ventasMes(meses[i], 2019)))
+
+        }
+    }
+
+    return " "
+
+}
+
+console.log(renderPorMes())
+
 
 console.log(" ")
 console.log("Ejercicio 2")
 
 function renderPorSucursal() {
-       
-    for (var i = 0; i < local.sucursales.length; i++) {  
-                var totalsucursal=0
-                if(local.ventas[i].sucursales == (local.ventas[i].sucursales)) {
-                    totalsucursal = ((totalsucursal) + (ventaSucursal(local.sucursales[i])));
-                    console.log("En la sucursal " + local.sucursales[i] + " se facturaron $" + (ventaSucursal(local.sucursales[i])))
-            }
-            
-            }
-            return " "
-        }   
-        
+
+    for (var i = 0; i < local.sucursales.length; i++) {
+        var totalsucursal = 0
+        if (local.ventas[i].sucursales == (local.ventas[i].sucursales)) {
+            totalsucursal = ((totalsucursal) + (ventaSucursal(local.sucursales[i])));
+            console.log("Total de " + local.sucursales[i] + ": " + (ventaSucursal(local.sucursales[i])))
+        }
+
+    }
+    return " "
+}
 
 console.log(renderPorSucursal())
