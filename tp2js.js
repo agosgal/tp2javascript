@@ -25,13 +25,12 @@ var local = {
 
 };
 
+console.log(local.sucursales[0])
+
 console.log("PRIMER PUNTO")
 
 console.log(" ")
 console.log("Funcion 1")
-
-var precio1 = 0
-
 
 function precioMaquina(componentes) {
     var precio1 = 0
@@ -53,29 +52,28 @@ console.log(precioMaquina(["RAM Quinston Fury", "Motherboard MZI"]));
 console.log(" ")
 console.log("Funcion 2")
 
-
-var cantidadvendida = 0
-
-function cantidadVentas(componente) {
-    cantidadvendida = 0;
-    for (i = 0; i < local.ventas.length; i++) {
-        if ((componente == local.ventas[i].componentes[0]) || (componente == local.ventas[i].componentes[1])) {
+function cantidadVentas(componente2) {
+    var cantidadvendida = 0;
+    for (var i = 0; i < local.ventas.length; i++) {
+        for (var j = 0; j < componente2.length; j++) {
+        if (local.ventas[i].componentes.includes(componente2[j])) {
             cantidadvendida++
         }
+    }
     }
     return cantidadvendida
 }
 
 
-console.log(cantidadVentas("Monitor ASC 543"));
-console.log(cantidadVentas("Monitor GPRS 3000"));
-console.log(cantidadVentas("Motherboard MZI"));
-console.log(cantidadVentas("Motherboard ASUS 1500"));
-console.log(cantidadVentas("Motherboard ASUS 1200"));
-console.log(cantidadVentas("HDD Toyiva"));
-console.log(cantidadVentas("HDD Wezter Dishital"));
-console.log(cantidadVentas("RAM Quinston"));
-console.log(cantidadVentas("RAM Quinston Fury"));
+console.log(cantidadVentas(["Monitor ASC 543"]));
+console.log(cantidadVentas(["Monitor GPRS 3000"]));
+console.log(cantidadVentas(["Motherboard MZI"]));
+console.log(cantidadVentas(["Motherboard ASUS 1500"]));
+console.log(cantidadVentas(["Motherboard ASUS 1200"]));
+console.log(cantidadVentas(["HDD Toyiva"]));
+console.log(cantidadVentas(["HDD Wezter Dishital"]));
+console.log(cantidadVentas(["RAM Quinston"]));
+console.log(cantidadVentas(["RAM Quinston Fury"]));
 
 console.log(" ")
 console.log("Funcion 3")
@@ -118,34 +116,30 @@ console.log("Funcion 3 - sin hardcodear")
 function vendedoraDelMes2(mes, anio) {
     var arrayVendedoras = []
     for (var j = 0; j<local.vendedoras.length; j++)  {
-        console.log(objetoNuevo)
-        var objetoNuevo = 
-        { nombre: local.vendedoras[j],
-        ventas: 0,
-    }
+        var objetoNuevo = [
+        { nombre: local.vendedoras[j], ventas: 0}
+]
         for (var i = 0; i<local.ventas.length; i++) {
             if (local.ventas[i].fecha.getMonth() + 1 == mes && local.ventas[i].fecha.getFullYear() == anio) {
                 if (local.vendedoras[j] === local.ventas[i].nombreVendedora) {
-                    if (objetoNuevo.nombre === local.ventas[i].nombreVendedora) {
+                     {
                     objetoNuevo.ventas = (objetoNuevo.ventas + precioMaquina(local.ventas[i].componentes))
                 }
                 }
+                if (objetoNuevo[i].nombre === local.ventas[i].nombreVendedora)
+                console.log(objetoNuevo)
             }
 
-        }
-
-        arrayVendedoras.push(objetoNuevo);
-        console.log(arrayVendedoras);
-        var valorMax = 0;
-        for (var k = 0; k<arrayVendedoras.length; k++) {
-            if (valorMax < arrayVendedoras[k].ventas) {
-                valorMax = arrayVendedoras[k].ventas;
-                console.log(valorMax)
-            }
         }
 
     }
 }
+console.log(vendedoraDelMes2(2, 2019))
+
+console.log(" ")
+console.log(" ")
+console.log(" ")
+
 
 console.log(" ")
 console.log("Funcion 4")
@@ -336,33 +330,123 @@ console.log(ventasTotal("sucursal", "Caballito"))
 console.log(" ")
 console.log("Funcion 6")
 
-var sucursal1 = "Centro"
-var sucursal2 = "Caballito"
-var ganador
+// var sucursal1 = "Centro"
+// var sucursal2 = "Caballito"
+// var ganador
+
+// function sucursalDelMes(mes, anio) {
+//     var vtassucursal1 = 0;
+//     var vtassucursal2 = 0;
+
+//     for (var i = 0; i < local.ventas.length; i++) {
+//         if ((mes == local.ventas[i].fecha.getMonth() + 1) && (anio == local.ventas[i].fecha.getFullYear()) && (sucursal1 == local.ventas[i].sucursal)) {
+//             vtassucursal1 = (vtassucursal1 + precioMaquina(local.ventas[i].componentes));
+//         }
+//     }
+//     for (var j = 0; j < local.ventas.length; j++) {
+//         if ((mes == local.ventas[j].fecha.getMonth() + 1) && (anio == local.ventas[j].fecha.getFullYear()) && (sucursal2 == local.ventas[j].sucursal)) {
+//             vtassucursal2 = (vtassucursal2 + precioMaquina(local.ventas[j].componentes));
+//         }
+//     }
+//     if (vtassucursal1 > vtassucursal2) {
+//         ganador = sucursal1;
+//     } else {
+//         ganadora = sucursal2;
+//     }
+//     return ganador
+// }
+
+
+
+// console.log("En Enero el local que más vendió fue: " + sucursalDelMes(1, 2019));
+// console.log("En Febrero el local que más vendió fue: " + sucursalDelMes(2, 2019))
 
 function sucursalDelMes(mes, anio) {
-    var vtassucursal1 = 0;
-    var vtassucursal2 = 0;
+    for ( var i = 0; i<local.sucursales.length; i++) {
+        var arraysuc = {
+            sucursal: local.sucursales[i], ventas: 0}
+        console.log(arraysuc)
+    }
 
-    for (var i = 0; i < local.ventas.length; i++) {
-        if ((mes == local.ventas[i].fecha.getMonth() + 1) && (anio == local.ventas[i].fecha.getFullYear()) && (sucursal1 == local.ventas[i].sucursal)) {
-            vtassucursal1 = (vtassucursal1 + precioMaquina(local.ventas[i].componentes));
-        }
-    }
     for (var j = 0; j < local.ventas.length; j++) {
-        if ((mes == local.ventas[j].fecha.getMonth() + 1) && (anio == local.ventas[j].fecha.getFullYear()) && (sucursal2 == local.ventas[j].sucursal)) {
-            vtassucursal2 = (vtassucursal2 + precioMaquina(local.ventas[j].componentes));
+        console.log(local.ventas[j].sucursal)
+        for (var k= 0; k < arraysuc.length; k++) {
+            console.log(local.ventas[j].sucursal)
+        if ((mes == (local.ventas[j].fecha.getMonth() + 1)) && (anio == local.ventas[i].fecha.getFullYear())) {
+            if (arraysuc[k].sucursal === local.ventas[j].sucursal) {
+            arraysuc[k].ventas = arraysuc[i].ventas + precioMaquina(local.ventas[j].componentes)
+            }
+        }
         }
     }
-    if (vtassucursal1 > vtassucursal2) {
-        ganador = sucursal1;
-    } else {
-        ganadora = sucursal2;
-    }
-    return ganador
 }
 
 
+console.log(sucursalDelMes(1,2019))
 
-console.log("En Enero el local que más vendió fue: " + sucursalDelMes(1, 2019));
-console.log("En Febrero el local que más vendió fue: " + sucursalDelMes(2, 2019))
+
+console.log(" ")
+console.log("TERCER PUNTO")
+
+console.log(" ")
+console.log("Ejercicio 1")
+
+
+// function renderPorMes() {
+//     var meses = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+//     var mespalabra = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+       
+//     for (var i = 0; i < local.ventas.length; i++) {
+//             for (var j = 0; j < meses.length; j++) {  
+//                 var totalmes=0
+//                 if(meses[j] == (local.ventas[i].fecha.getMonth() + 1)) {        
+//                     totalmes = ((totalmes) + (ventasMes(meses[j], 2019)));
+//                     console.log("En el mes de " + mespalabra[j] + " se facturaron $" + (ventasMes(meses[j], 2019)))
+//             }
+//             }
+//         }   
+//         return " "
+
+//         }
+        
+    
+//     console.log(renderPorMes()) 
+
+    function renderPorMes() {
+        var meses = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+        var mespalabra = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+        
+        for (var i = 0; i < local.ventas.length; i++) {
+                for (var j = 0; j < meses.length; j++) {  
+                    var totalmes=0
+                    if(meses[j] == (local.ventas[i].fecha.getMonth() + 1)) {        
+                        totalmes = ((totalmes) + (ventasMes(meses[j], 2019)));
+                        console.log("En el mes de " + mespalabra[j] + " se facturaron $" + (ventasMes(meses[j], 2019)))
+                }
+                }
+            }   
+            return " "
+    
+            }
+            
+        
+        console.log(renderPorMes()) 
+
+console.log(" ")
+console.log("Ejercicio 2")
+
+function renderPorSucursal() {
+       
+    for (var i = 0; i < local.sucursales.length; i++) {  
+                var totalsucursal=0
+                if(local.ventas[i].sucursales == (local.ventas[i].sucursales)) {
+                    totalsucursal = ((totalsucursal) + (ventaSucursal(local.sucursales[i])));
+                    console.log("En la sucursal " + local.sucursales[i] + " se facturaron $" + (ventaSucursal(local.sucursales[i])))
+            }
+            
+            }
+            return " "
+        }   
+        
+
+console.log(renderPorSucursal())
