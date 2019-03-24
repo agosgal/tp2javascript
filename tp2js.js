@@ -142,31 +142,29 @@ console.log("Ada vendió en total: " + ventasVendedora("Ada"));
 console.log(" ")
 console.log("Funcion 6")
 
-var arrayprueba = [1, 3, 5, 6]
-
 function componenteMasVendido() {
-    var qvendidas = [];
+    var arrayporcomponente = []
     for (var i = 0; i < local.precios.length; i++) {
-        (cantidadVentas(local.precios[i].componente));
-        (qvendidas.push(cantidadVentas(local.precios[i].componente)));
+        var paraarraycomp =
+            { componente: local.precios[i].componente, ventas: 0 }
+            arrayporcomponente.push(paraarraycomp);
+}
+for (j = 0; j < arrayporcomponente.length; j++) {
+    arrayporcomponente[j].ventas = cantidadVentas([arrayporcomponente[j].componente]);
+}
+valormax = 0
+masvendido = ""
+for (k = 0; k < arrayporcomponente.length; k++) {
+    if (valormax < arrayporcomponente[k].ventas) {
+        valormax = arrayporcomponente[k].ventas;
+        masvendido = arrayporcomponente[k].componente
     }
-    for (var j = 0; j < qvendidas.length; j++) {
-        var mayorvalor = 0;
-        if (qvendidas[j] > mayorvalor) {
-            mayorvalor = qvendidas[j];
-        }
-        for (var k = 0; k < local.precios.length; k++) {
-            var masvendido
-            if (mayorvalor == (cantidadVentas(local.precios[k].componente))) {
-                masvendido = local.precios[k].componente
-            }
-        }
-        return masvendido
-    }
+    
+}
+return masvendido
 }
 
-console.log(componenteMasVendido());
-
+console.log(componenteMasVendido())
 
 console.log(" ")
 console.log("Funcion 7")
@@ -422,7 +420,7 @@ function render() {
             }
             console.log("Producto estrella:", componenteMasVendido());
             console.log("Vendedora que más ingresos generó: " , vendedoraDelMes())
-            
+return " "
 }
         
 console.log(render())
