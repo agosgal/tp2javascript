@@ -91,45 +91,20 @@ function vendedoraDelMes(mes, anio) {
             }
         }
     }
+    var ganadora = ""
     var valormax = 0
     for (var n = 0; n < arraynuevov.length; n++) {
         if (valormax < arraynuevov[n].ventas) {
             valormax = arraynuevov[n].ventas;
-            console.log("La sucursal que más vendió fue", arraynuevov[n].vendedora)
+            ganadora = arraynuevov[n].vendedora
         }
     }
-    return " "
+    return ganadora
 }
 
 console.log(vendedoraDelMes(1, 2019))
 
-// function vendedoraDelMes2(mes, anio) {
-//     var arraydatos = []
-//     for (var i = 0; i < local.vendedoras.length; i++) {
-//         var arrayvendedora =
-//             { vendedora: local.vendedoras[i], ventas: 0 }
-//         arraydatos.push(arrayvendedora);
-//     }
-//     for (var j = 0; j < arraydatos.length; j++) {
-//         for (var k = 0; k < local.ventas.length; k++) {
-//             if (arraydatos[j].vendedora == local.ventas[k].nombreVendedora) {
-//                 arraydatos[j].ventas = ((arraydatos[j].ventas) + precioMaquina(local.ventas[k].componentes));
-//             }
-//         }
-//     }
-//     var valormax = 0
-//     for (var n = 0; n < arraydatos.length; n++) {
-//         if (valormax < arraydatos[n].ventas) {
-//             valormax = arraydatos[n].ventas;
-//             console.log("La vendedora que más vendió fue", arraydatos[n].vendedora, "con", valormax)
-//         }
-//     }
-//     return " "
-// }
-// console.log(vendedoraDelMes2(1, 2019))
-
-
-
+ 
 console.log(" ")
 console.log("Funcion 4")
 
@@ -335,14 +310,15 @@ function sucursalDelMes(mes, anio) {
             }
         }
     }
+    var ganador = ""
     var valormax = 0
     for (var n = 0; n < arraynuevo.length; n++) {
         if (valormax < arraynuevo[n].ventas) {
             valormax = arraynuevo[n].ventas;
-            console.log("La sucursal que más vendió fue", arraynuevo[n].sucursal)
+            ganador = arraynuevo[n].sucursal
         }
     }
-    return " "
+    return ganador
 }
 
 console.log(sucursalDelMes(1, 2019))
@@ -396,4 +372,7 @@ function renderPorSucursal() {
     return " "
 }
 
-console.log(renderPorSucursal())
+console.log(renderPorSucursal());
+
+console.log(" ")
+console.log("Ejercicio 3")
