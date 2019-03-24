@@ -376,3 +376,53 @@ console.log(renderPorSucursal());
 
 console.log(" ")
 console.log("Ejercicio 3")
+
+function render() {
+    var meses = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    var mespalabra = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    var arraymeses = []
+    for (var n = 0; n < meses.length; n++) {
+        var paraarray =
+            { mes: meses[n], ventas: 0 }
+            arraymeses.push(paraarray)
+    }
+    for (var i = 0; i < local.ventas.length; i++) {
+        
+        for (var j = 0; j < arraymeses.length; j++) {
+           
+                if (arraymeses[j].mes == local.ventas[i].fecha.getMonth() + 1) {
+                    arraymeses[j].ventas = ventasMes(local.ventas[i].fecha.getMonth() + 1, 2019);
+            }
+            }
+            }
+            console.log("Ventas por mes:")
+            for (var k = 0; k < meses.length; k++)
+            if (arraymeses[k].ventas > 0) {
+                console.log("Total mes de ", mespalabra[k], " : ", arraymeses[k].ventas)
+            }
+    var arraylocales = []
+    for (var n = 0; n < local.sucursales.length; n++) {
+        var paraarray2 =
+            { sucursal: local.sucursales[n], ventas: 0 }
+            arraylocales.push(paraarray2);
+    }
+    for (var i = 0; i < local.ventas.length; i++) {
+        
+        for (var j = 0; j < arraylocales.length; j++) {
+           
+                if (arraylocales[j].sucursal == local.ventas[i].sucursal) {
+                    arraylocales[j].ventas = ventaSucursal(arraylocales[j].sucursal);
+            }
+            }
+            }
+            console.log("Ventas por sucursal:")
+            for (var k = 0; k < local.sucursales.length; k++)
+            if (arraylocales[k].ventas > 0) {
+                console.log("Total mes de ", arraylocales[k].sucursal, " : ", arraylocales[k].ventas)
+            }
+            console.log("Producto estrella:", componenteMasVendido());
+            console.log("Vendedora que más ingresos generó: " , vendedoraDelMes())
+            
+}
+        
+console.log(render())
