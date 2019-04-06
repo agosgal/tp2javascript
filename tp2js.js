@@ -1,3 +1,18 @@
+// Agos, en general el trabajo esta muy bien y tenes unas muy merecidas felicitaciones. 
+
+// Como observacion general y para ir pensando en mejorar tu codigo a partir de ahora:
+// 1. Estaria bueno ir aplicando mas prolijidad a tu codigo: prestarle atencion siempre al tabulado
+// 2. Ir pensando en nombres de variables mas descriptivos, que pueda entender cualquiera apenas ve tu codigo
+// 3. Si bien no esta mal usar parentesis para separar los elementos de una operacion matematica, 
+// lo cierto es que no es estandar usarlos cuando no son necesarios (y puede confundir a quien lo lee rapidamente). 
+// Por ejemplo cuando escribis " precio1 = ((local.precios[i].precio) + precio1) "
+// Es mas comun escribirlo asi: "precio1 = local.precios[i].precio + precio1 "
+// Entiendo que por ahora te resulte mas comodo ir separandolos asi, pero seria buena practica que 
+// de ahora en mas trates de no hacerlo. 
+
+// Deje salpicados a lo largo de tu codigo algunos comentarios o maneras alternativas de resolver las funciones
+// Cualquier cosa escribime. 
+
 var local = {
     vendedoras: ["Ada", "Grace", "Hedy", "Sheryl"],
 
@@ -37,7 +52,9 @@ function precioMaquina(componentes) {
     for (var i = 0; i < local.precios.length; i++) {
         for (var j = 0; j < componentes.length; j++) {
             if (componentes[j] == local.precios[i].componente) {
-                precio1 = ((local.precios[i].precio) + precio1)
+                precio1 = ((local.precios[i].precio) + precio1) 
+                // Tambien, para abreviar, podriamos decir 
+                // precio1 += local.precios[i].precio
             }
         }
     }
@@ -48,6 +65,7 @@ console.log(precioMaquina(["Monitor GPRS 3000", "Motherboard ASUS 1500"]));
 console.log(precioMaquina(["Monitor ASC 543", "RAM Quinston"]));
 console.log(precioMaquina(["RAM Quinston Fury", "Motherboard MZI"]));
 
+// Muy bien! 
 
 console.log(" ")
 console.log("Funcion 2")
@@ -63,6 +81,22 @@ function cantidadVentas(componente2) {
     }
     return cantidadvendida
 }
+
+// No esta mal esta solucion, pero estas forzando un poco la consigna. 
+// La idea es que el componente reciba un string, y tu codigo no funciona
+// a menos que le pasemos cada componente como si fuese el unico elemento 
+// dentro de un array. 
+// Una manera de resolverlo sin tener que pasar por ese paso es usando IndexOf
+// 
+// function cantidadVentas(componente) {
+//   var cantidadvendida = 0;
+//   for (var i = 0; i < local.ventas.length; i++) {
+//     if (local.ventas[i].componentes.indexOf(componente) >= 0) {
+//       cantidadvendida++;
+//     }
+//   }
+//   return cantidadvendida;
+// }
 
 
 console.log(cantidadVentas(["Monitor ASC 543"]));
@@ -80,7 +114,12 @@ console.log("Funcion 3")
 function vendedoraDelMes(mes, anio) {
     var arraynuevov = []
     for (var i = 0; i < local.vendedoras.length; i++) {
-        var arrayvend =
+        var arrayvend = // esto es un detalle, pero el nombre de este objeto es confuso. 
+                        // en general queremos que sean nombres lo mas descriptivos posibles.
+                        // Si yo leo "arrayvend" pienso que es un array de vendedoras, 
+                        // no un objeto con cada vendedora. 
+                        // (un desarrollador muy famoso, Phil Karlton, dijo que la parte mas
+                        // dificil de la computacion era ponerle nombre a las cosas, y tenia razon!)
             { vendedora: local.vendedoras[i], ventas: 0 }
         arraynuevov.push(arrayvend)
     }
@@ -102,6 +141,8 @@ function vendedoraDelMes(mes, anio) {
     return ganadora
 }
 
+// Muy bien!
+
 console.log(vendedoraDelMes(1, 2019))
 
  
@@ -117,6 +158,8 @@ function ventasMes(mes, anio) {
     }
     return montovendido
 }
+
+// Excelente
 
 console.log(ventasMes(1, 2019));
 console.log(ventasMes(2, 2019));
@@ -135,6 +178,8 @@ function ventasVendedora(vendedora) {
     }
     return ventastotales
 }
+
+// Excelente
 
 console.log("Grace vendió en total: " + ventasVendedora("Grace"));
 console.log("Ada vendió en total: " + ventasVendedora("Ada"));
@@ -164,6 +209,25 @@ for (k = 0; k < arrayporcomponente.length; k++) {
 return masvendido
 }
 
+
+// Prestale atencion en esta funcion al tabulado
+// Es un detalle, pero ayuda muchisimo a la legibilidad de tu codigo
+// (En Visual Studio, clic derecho, "format document" te corrige el tabulado automaticamente)
+
+// Una manera alternativa de resolverlo que reduce mucho el codigo seria
+// usando la misma logica con la que encontramos la variable "valormax" en vendedora del mes: 
+
+// function componenteMasVendido () {
+//   var componente = local.precios[0].componente;
+//   for (var i = 0; i < local.precios.length; i++) {
+//     if (cantidadVentasComponente(local.precios[i].componente) > cantidadVentasComponente(componente)) {
+//       componente = precios[i].componente;
+//     }
+//   }
+//   return componente;
+// }
+
+
 console.log(componenteMasVendido())
 
 console.log(" ")
@@ -189,6 +253,24 @@ function huboVentas(mes, anio) {
     }
     return ventassino
 }
+
+
+// El segundo for parece innecesario: el codigo funciona igual sin el. 
+// De esta manera:
+
+// function huboVentas(mes, anio) {
+//     var ventassino
+//     var mesesconvta = []
+//     for (var i = 0; i < local.ventas.length; i++) {
+//         (mesesconvta.push(local.ventas[i].fecha.getMonth() + 1));
+//         if (mesesconvta.includes(mes)) {
+//             ventassino = "Si"
+//         } else {
+//             ventassino = "No"
+//         }
+//     }
+//     return ventassino
+// }
 
 
 
@@ -223,6 +305,11 @@ console.log("Ejercicio 2")
 
 console.log(local);
 
+// se podia agregar al objeto directamente como lo hiciste, 
+// o tambien con un comando en este punto, asi:
+// local.ventas.sucursales = ["Centro", "Caballito"]
+// Como los objetos son dinamicos, podemos agregarles propiedades despues de enunciarlos
+
 console.log(" ")
 console.log("Ejercicio 3")
 
@@ -247,6 +334,7 @@ console.log(agregarInfo(2019, 1, 1, "Grace", ["Motherboard MZI", "HDD Wezter Dis
 console.log(agregarInfo(2019, 1, 7, "Sheryl", ["Monitor GPRS 3000", "RAM Quinston"], "Caballito"));
 console.log(agregarInfo(2019, 1, 14, "Ada", ["Motherboard ASUS 1200", "HDD Toyiva"], "Centro"));
 
+// excelente, me encanta que lo hayas hecho con una funcion. 
 
 console.log(" ")
 console.log("Ejercicio 4")
@@ -263,9 +351,15 @@ function ventaSucursal(sucursal) {
     return ventastotaless
 }
 
+// Bien
+
 local.ventas
 local[variable]
 var variable = "componentes"
+
+// Esto es un detalle, pero no esta bueno dejar codigo colgado como el de arriba
+// A veces no hace nada, como en este caso
+// Pero en otras ocasiones puede arruinarnos los resultados
 
 console.log("Centro vendió en total: " + ventaSucursal("Centro"));
 console.log("Caballito vendió en total: " + ventaSucursal("Caballito"));
@@ -284,6 +378,20 @@ function ventasTotal(dato, parametro) {
     }
     return ventastotal
 }
+
+// Bien! Otra manera, para no pasar dos parametros,  es asi:
+// function ventasTotal(dato) {
+//     var total = 0;
+//     for (var i = 0; i < local.ventas.length; i++) {
+//         if (local.ventas[i].sucursal === dato || local.ventas[i].nombreVendedora === dato) {
+//             total += precioMaquina(local.ventas[i].componentes);
+//         }
+//     }
+//     return total;
+// }
+// y a la hora de llamar a la funcion, lo hacemos asi:
+// console.log(ventasTotal("Grace"));
+// console.log(ventasTotal("Caballito));
 
 console.log(ventasTotal("nombreVendedora", "Grace"));
 console.log(ventasTotal("nombreVendedora", "Ada"));
@@ -319,6 +427,7 @@ function sucursalDelMes(mes, anio) {
     return ganador
 }
 
+// Bien 
 console.log(sucursalDelMes(1, 2019))
 
 
@@ -350,7 +459,7 @@ function renderPorMes() {
     return " "
 
 }
-
+// bien!
 console.log(renderPorMes())
 
 
@@ -424,3 +533,5 @@ return " "
 }
         
 console.log(render())
+
+// Excelente trabajo!
